@@ -1,0 +1,46 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+<div class="container">
+    <div class="pt-5 pb-5">
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <hr>
+        <p style="font-weight: 600;color: #999;">{{user.email}} <br/>{{user.phone_number}}</p>
+        <hr>
+        <h3>Address</h3>
+        {% for addr in adds %}
+        <div class="card mb-2">
+            <div class="card-body" style="color: #999;">
+                <h5 style="color: #333;">Address {{loop.index}}</h5>
+                <h5>{{addr.add_line_1}}</h5>
+                {% if addr.add_line_2 %}
+                    <h6>{{addr.add_line_2}}</h6>
+                {% endif %}
+                <h6>City: {{addr.city}}</h6>
+                <h6>State: {{addr.state}}</h6>
+                <h6>Zip code: {{addr.zip_code}}</h6>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}
+<!-- Main Content Ends -->

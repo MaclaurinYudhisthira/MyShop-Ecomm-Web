@@ -1,0 +1,69 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+
+    {% if not data %}
+        <h1>Your orders will be shown here... </h1>
+        <a href="{{url_for('home')}}" class="btn btn-info">Shop Now</a>
+        <div style="height: 50vh;"></div>
+    {% endif %}
+    {% if data %}
+        {% for order,products,addr in data %}
+        <div class="card p-4 mt-4 mb-4">
+            <h3>Order id:{{order.order_id}}</h3>
+                {% for product,quantity in products %}
+                    <div class=" grid grid-2 mt-2 mb-2">
+                        <a href="/product/{{product.product_id}}" class="">
+                            <img class="card-img-top" src="{{url_for('static',filename='img/'+product.image)}}" alt="{{product.title}}" style="width: 5vw;">
+                        </a>
+                        <div class="card-body">
+                            <a href="/product/{{product.product_id}}" class="text-dark "><h6 class="card-title">{{product.title}}</h6></a>
+                            <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{product.category}}</h6>
+                            <span class="card-link text-warning bg-dark p-1 mt-2 rounded">{{product.price}}$</span>
+                            <br>
+                            <span class="mt-2">Quantity: {{quantity}} psc.</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            <h6>Time Placed: {{order.time_placed}}</h6>
+            <h6>
+                Address: {{addr.add_line_1}},
+                {% if addr.add_line_2 %}
+                        {{addr.add_line_2}}, 
+                {% endif %}
+                {{addr.city}}, {{addr.state}}, {{addr.zip_code}}
+            </h6>
+            <h3>Amount: {{'%.2f'%order.amount}}$</h3>
+            <form action="{{url_for('myOrders')}}" method="POST"  onsubmit="return confirmation()">
+                <input type="hidden" name="order_id" value="{{order.order_id}}">
+                <input type="submit" value="Cancle Order" class="sbmt btn btn-warning mt-2">
+            </form>
+        </div>
+        {% endfor %}
+        
+    {% endif %}
+        <script>
+            function confirmation(){
+                return confirm('Wait, Are you sure to cancle order?');
+            }
+        </script>
+</div>
+{% endblock %}
+<!-- Main Content Ends -->

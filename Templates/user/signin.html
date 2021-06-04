@@ -1,0 +1,40 @@
+{% extends "user/base1.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 80%;margin: 20px auto;">
+        <h2 style="margin: 5px auto;">Log In</h2>
+        <form action="{{url_for('userSignIn')}}" method="POST">
+            <div class="form-group">
+                Enter Email or Phone Number
+                <input class="form-control" type="text" name="email" placeholder="Email or Phone number here" id="" required>
+                Enter Password
+                <input class="form-control" type="password" name="password" placeholder="Password here" id="" required>
+                <input class="form-control" type="submit" value="Submit">
+                <a href="{{url_for('userForgotPassword')}}">Forgot password?</a>
+                 <span>Or Create a <a href="{{url_for('userSignUp')}}">New Account</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- Main Content Ends -->

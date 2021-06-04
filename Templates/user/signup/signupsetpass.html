@@ -1,0 +1,73 @@
+{% extends "user/base1.html" %}
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 80%;margin: 20px auto;">
+        <form action="{{url_for('registerUser')}}" method="POST" id="form1">
+            <div class="form-control">
+                First name
+                <input type="text" name="first_name" id="" required>
+            </div>
+            <div class="form-control">
+                Last name
+                <input type="text" name="last_name" id="" required>
+            </div>
+            <div class="form-group">
+                Street Address
+                <input id="address" class="form-control" type="text" name="add_line_1" placeholder="Street Address" required>
+            </div>
+            <div class="form-group">
+                Street Address Line 2
+                <input id="address1" class="form-control" type="text" name="add_line_2" placeholder="Street Address Line 2" required>
+            </div>
+            <div class="form-group">
+                City
+                <input id="address2" class="form-control" type="text" name="city" placeholder="City" required>
+            </div>
+            <div class="form-group">
+                State / Province
+                <input id="address3" class="form-control" type="text" name="state" placeholder="State / Province" required>
+            </div> 
+            <div class="form-group">
+                Postal / Zip Code
+                <input id="address4" class="form-control" type="text" name="zip_code" placeholder="Postal / Zip Code" required>
+            </div>
+            <div class="form-group">
+                Enter new password
+                <input class="form-control" type="password" name="password" id="p1" required>
+                Confirm new password
+                <input class="form-control" type="password" name="password1" id="p2" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('form1').addEventListener('submit',function(e){
+        e.preventDefault();
+        x=document.getElementById('p1').value;
+        y=document.getElementById('p2').value;
+        if(x==y){
+            e.target.submit();
+        }
+        else{
+            alert("Passwords not matched");
+            return false;
+        }
+    });
+</script>
+{% endblock %}
+<!-- Main Content Ends -->

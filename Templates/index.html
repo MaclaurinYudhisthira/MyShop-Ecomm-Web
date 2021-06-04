@@ -1,0 +1,40 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}Home{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="showcase bg-1"></div>
+<!-- <img src="{{url_for('static',filename='img/dis1.jpg')}}" alt="" width="100%"> -->
+<div class="container-1">
+    {% for category in categories %}
+    <div style="margin: 40px 0;">
+        <h1 class="text-capitalize">{{category}}</h1>
+        <div class="grid grid-1">
+            {% for item in data[category] %}
+                {% with item=item %}
+                    {% include "components/product.html" %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+        <a href="/category/{{category}}" class="btn btn-primary">See More</a>
+    </div>
+    <hr>
+    {% endfor %}
+<div class="container"></div>
+</div>
+{% endblock %}
+<!-- Main Content Starts -->

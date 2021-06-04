@@ -1,0 +1,11 @@
+<div class="card product bg-warning">
+    <a href="/product/{{item.product_id}}" style="overflow: hidden;width: 100%;height: 300px;">
+        <img class="card-img-top" src="{{url_for('static',filename='img/'+item.image)}}" alt="{{item.title}}" style="">
+    </a>
+        <div class="card-body">
+        <a href="/product/{{item.product_id}}" class="text-dark "><h6 class="card-title">{{item.title}}</h6></a>
+        <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{item.category}}</h6>
+        <!-- <p class="card-text">{{item.description}}</p> -->
+        <span class="card-link text-warning bg-dark p-1 rounded">{{item.price}}$</span>
+    </div>
+</div>    

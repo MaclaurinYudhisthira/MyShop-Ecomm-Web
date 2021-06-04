@@ -1,0 +1,114 @@
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background: #fff;
+    color: #333;
+}
+.container-1{
+    width: 95vw;
+    margin: auto;
+}
+.grid{
+    display: grid;
+    justify-content: space-around;
+    align-content: center;
+}
+.grid-1{
+    grid-template-columns: auto auto auto auto;
+}
+.grid-2{
+    grid-template-columns: auto auto;
+    justify-content: left;
+}
+.card{
+    padding: 0;
+    border: 0;
+    box-shadow: 0px 0px 10px 0px rgba(247,195,69,0.75);
+-webkit-box-shadow: 0px 0px 10px 0px rgba(247,195,69,0.75);
+-moz-box-shadow: 0px 0px 10px 0px rgba(247,195,69,0.75);
+}
+.product{
+    margin:40px 20px;
+}
+.showcase{
+    width: 100%;
+    height: 70vh;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.bg-1{
+    background-image: url("../img/dis1.jpg");
+}
+.bg-2{
+    background-image: url("../img/dis2.jpg");
+}
+.overlay{
+    background-color: rgba(20, 18, 18, 0.233);
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.ol-text{
+    color: rgb(241, 218, 88);
+    position: absolute;
+    top:40%;
+    left: 10%;
+    transition: transform(-50%,-50%);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .grid-1{
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+    .product{
+        width:50%;
+        margin: auto;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .grid-1{
+        grid-template-columns: auto auto;
+    }
+    .product{
+        width:35vw;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .grid-1{
+        grid-template-columns: auto auto auto;
+    }
+    .product{
+        width:25vw;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .grid-1{
+        grid-template-columns: auto auto auto auto;
+    }
+    .product{
+        width:21vw;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .grid-1{
+        grid-template-columns: auto auto auto auto;
+    }
+    .product{
+        width:17vw !important;
+    }
+    .container-1{
+        width: 70%;
+    }
+}

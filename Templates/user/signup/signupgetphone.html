@@ -1,0 +1,27 @@
+{% extends "user/base1.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 80%;margin: 20px auto;">
+        <h2 style="margin: 5px auto;">Phone Number Validation</h2>
+        <form action="{{url_for('sendPhoneOTP')}}" method="POST">
+            Enter Number
+            <input class="form-control" type="text" name="phone_number" placeholder="Phone Number" required>
+            <input class="form-control" type="submit">
+        </form>        
+    </div>
+</div>
+
+{% endblock %}
+<!-- Main Content Ends -->

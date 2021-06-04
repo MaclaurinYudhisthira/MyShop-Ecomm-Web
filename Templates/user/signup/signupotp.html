@@ -1,0 +1,32 @@
+{% extends "user/base1.html" %}
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 80%;margin: 20px auto;">
+        <h2 style="margin: 5px auto;">An opt is sent on <span class="text-capitalize">{{ email }}</span></h2>
+        <form action="/validateSignUpOTP" method="POST">
+            <input class="form-control" type="password" name="otp" placeholder="Enter OTP here" required>
+            <input class="form-control" type="submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+<!-- Main Content Ends -->

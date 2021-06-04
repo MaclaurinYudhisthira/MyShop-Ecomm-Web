@@ -1,0 +1,32 @@
+<div class="card grid grid-2 mt-4 mb-4">
+    <a href="/product/{{item.product_id}}" class="" style="overflow: hidden;">
+        <img class="card-img-top" src="{{url_for('static',filename='img/'+item.image)}}" alt="{{item.title}}" style="width: 10vw;">
+    </a>
+
+    <div class="card-body">
+        <a href="/product/{{item.product_id}}" class="text-dark "><h6 class="card-title">{{item.title}}</h6></a>
+        <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{item.category}}</h6>
+        <span class="card-link text-warning bg-dark p-1 rounded">{{item.price}}$</span>
+        
+        {% if quantity %}
+            <select class="form-select form-select-sm sel" aria-label=".form-select-sm example">
+                <option disabled>Quantity</option>
+                {% for i in range(0,10) %}
+                    <option {% if i in [quantity] %}selected{% endif %} value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <input type="text" value="{{item.product_id}}" style="display: none;">
+            <a href="#" class="btn btn-danger btn-sm rem mt-2">Remove</a>
+            {% if 'user_id' in session %}
+                <a href="/saveItem/{{item.product_id}}" class="btn btn-success btn-sm mt-2">Add to Wishlist</a>
+            {% endif %}
+        {% endif %}
+        
+        {% if not quantity %}
+        <br>
+        <a href="/removeFromSaved/{{item.product_id}}/0" class="btn btn-danger btn-sm mt-2">Remove</a>
+        <a href="/removeFromSaved/{{item.product_id}}/1" class="btn btn-success btn-sm mt-2">Add to cart</a>
+        {% endif %}
+    </div>
+</div>

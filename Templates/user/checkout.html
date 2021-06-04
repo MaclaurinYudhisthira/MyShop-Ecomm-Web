@@ -1,0 +1,109 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add new Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{url_for('addAddress')}}" method="POST">
+            <div class="modal-body">
+                <div class="form-group">
+                    Street Address
+                    <input id="address" class="form-control" type="text" name="add_line_1" placeholder="Street Address">
+                </div>
+                <div class="form-group">
+                    Street Address Line 2
+                    <input id="address1" class="form-control" type="text" name="add_line_2" placeholder="Street Address Line 2">
+                </div>
+                <div class="form-group">
+                    City
+                    <input id="address2" class="form-control" type="text" name="city" placeholder="City">
+                </div>
+                <div class="form-group">
+                    State / Province
+                    <input id="address3" class="form-control" type="text" name="state" placeholder="State / Province">
+                </div> 
+                <div class="form-group">
+                    Postal / Zip Code
+                    <input id="address4" class="form-control" type="text" name="zip_code" placeholder="Postal / Zip Code">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" value="Add" class="btn btn-primary">
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    {% if not cart%}
+        <h1>No Items in Cart</h1>
+        <a href="{{url_for('home')}}" class="btn btn-info">Shop Now</a>
+        <div style="height: 50vh;"></div>
+    {% endif %}
+    {% if cart %}
+        {% for item in cart %}
+        <div class="card grid grid-2 mt-2 mb-2">
+            <a href="/product/{{item[0].product_id}}" class="">
+                <img class="card-img-top" src="{{url_for('static',filename='img/'+item[0].image)}}" alt="{{item[0].title}}" style="width: 10vw;">
+            </a>
+        
+            <div class="card-body">
+                <a href="/product/{{item[0].product_id}}" class="text-dark "><h6 class="card-title">{{item[0].title}}</h6></a>
+                <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{item[0].category}}</h6>
+                <span class="card-link text-warning bg-dark p-1 mt-2 rounded">{{item[0].price}}$</span>
+                <br>
+                <span class="mt-2">Quantity: {{item[1]}} psc.</span>
+            </div>
+        </div>
+        {% endfor %}
+        <h1>Total: {{'%.2f'%total}}$</h1>
+    {% endif %}
+    
+    {% if 'cart' in session %}
+        <form action="{{url_for('placeOrder')}}" method="POST">
+            <select class="form-select form-control mt-2 mb-2 " aria-label=".form-select-sm example" name="address_id" required>
+                {% for addr in adds %}
+                <option value="{{addr.addr_id}}">
+                    <h5>{{addr.add_line_1}},</h5>
+                    {% if addr.add_line_2 %}
+                            {{addr.add_line_2}}, 
+                    {% endif %}{{addr.city}}, {{addr.state}}, {{addr.zip_code}}
+                </option>
+                {% endfor %}
+            </select>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Add new Address
+            </button><br>
+            <input type="hidden" name="total" value="{{total}}">
+            <input type="submit" value="Place Order" class="btn btn-warning mt-2">
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
+<!-- Main Content Ends -->

@@ -1,0 +1,80 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+    {% if not cart%}
+        <div style="width:50%;margin:100px auto;text-align:center">
+            <img src="{{url_for('static',filename='img/b.png')}}" alt="" >
+            <h1>No Items in Cart</h1>
+        <a href="{{url_for('home')}}" class="btn btn-info">Shop Now</a>
+        </div>
+        
+    {% endif %}
+    {% if cart %}
+        {% for item in cart %}
+            {% with item=item[0],quantity=item[1] %}
+                {% include "components/item.html" %}
+            {% endwith %}
+        {% endfor %}
+        <h1>Total: {{'%.2f'%total}}$</h1>
+        <a href="{{url_for('checkOut')}}" class="btn btn-warning" >Checkout</a>
+        <div style="height: 170px;"></div>
+    {% endif %}
+
+    {% if 'cart' in session %}
+        
+    {% endif %}
+</div>    
+    <script>
+        document.querySelectorAll('.sel').forEach((ele)=>
+            ele.addEventListener('change',(e)=>{
+                console.log(e.target.nextElementSibling.value,e.target.value)
+                post(e.target.nextElementSibling.nextElementSibling.value,e.target.value)
+            }))
+        
+        document.querySelectorAll('.rem').forEach(function(ele){
+            ele.addEventListener('click',function(e){
+                e.preventDefault();
+                post(e.target.previousElementSibling.value);
+            })
+        })
+
+        function post(product_id,quatity=0,path='/updateCart',method='POST'){
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            let hiddenField1 = document.createElement('input');
+            hiddenField1.type = 'hidden';
+            hiddenField1.name = 'product_id';
+            hiddenField1.value = product_id;
+            form.appendChild(hiddenField1);
+
+            let hiddenField2 = document.createElement('input');
+            hiddenField2.type = 'hidden';
+            hiddenField2.name = 'quantity';
+            hiddenField2.value = quatity;
+            form.appendChild(hiddenField2);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+{% endblock %}
+<!-- Main Content Ends -->

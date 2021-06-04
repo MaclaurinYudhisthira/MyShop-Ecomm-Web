@@ -1,0 +1,112 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+    <div class="grid grid-2 mt-5 mb-5">
+        <img src="{{url_for('static',filename='img/'+item.image)}}" class="img-fluid" alt="Responsive image" style="max-width: 250px;margin:20px">
+        <div class="" style="margin:20px">
+            <h5 class="card-title">{{item.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted text-capitalize">{{item.category}}</h6>
+            <p class="card-text">{{item.description}}</p>
+            <a href="#" class="card-link">{{item.price}}$</a>
+            <form action="{{url_for('addToCart')}}" method="POST">
+                <input type="hidden" name="product_id" value="{{item.product_id}}">
+                <input class="btn" type="submit" value="Add to Cart">
+            </form>
+        </div>
+    </div>
+    {% if reviews or user_rev %}
+        <h2>Top Reviews</h2>
+        {% if 'user_id' in session %}
+            {% if user_rev %}
+            <div class="pb-2">
+                <i class="bi bi-person-circle"></i> <span class="text-capitalize">{{user_rev[1]}}</span><br>
+                {% for i in range(user_rev[0].rating) %}
+                <span class="text-warning"><i class="bi bi-star-fill" ></i></span>
+                {% endfor %}
+                {% for i in range(5-user_rev[0].rating) %}
+                <span class="text-warning"><i class="bi bi-star"></i></span>
+                {% endfor %}
+                <br>
+                <p style="margin-bottom: 0 !important;">{{user_rev[0].text}}</p>
+                 <a href="#" id="editbtn">Edit Review</a>
+            </div>
+            <form action="{{url_for('editReview')}}" style="width: 45vw;display:none;" method="POST">
+                <h2>Edit review</h2>
+                <div class="form-group">
+                    Review
+                    <textarea name="text" class="form-control" id="" cols="50" rows="5" placeholder="Write Your review here" value="" required>{{user_rev[0].text}}</textarea>
+                    Your rating: <input type="number" class="form-control" name="rating" id="" min="1" max="5" placeholder="Rating (1-5)" value="{{user_rev[0].rating}}" required>
+                    <input type="hidden" name="review_id" value="{{user_rev[0].review_id}}">
+                    <input type="submit" value="Edit" class="btn btn-primary mt-2">
+                </div>
+            </form>
+            {% endif %}
+            {% if not user_rev %}
+                <form action="{{url_for('addReview')}}" method="POST" style="width: 45vw;">
+                    <h5>Add review</h5>
+                    <div class="form-group">
+                        Review
+                        <textarea name="text" class="form-control" id="" cols="50" rows="5" placeholder="Write Your review here" required></textarea>
+                        Your rating: <input type="number" class="form-control" name="rating" id="" min="1" max="5" placeholder="Rating (1-5)" required>
+                        <input type="hidden" name="product_id" value="{{item.product_id}}">
+                        <input type="submit" value="Add" class="btn btn-primary mt-2">
+                    </div>
+                </form>
+            {% endif %}
+        {% endif %}
+        {% for review,name in reviews %}
+        <i class="bi bi-person-circle"></i> <span class="text-capitalize">{{name}}</span><br>
+        {% for i in range(review.rating) %}
+        <span class="text-warning"><i class="bi bi-star-fill" ></i></span>
+        {% endfor %}
+        {% for i in range(5-review.rating) %}
+        <span class="text-warning"><i class="bi bi-star"></i></span>
+        {% endfor %}
+        <br>
+        <p>{{review.text}}</p>
+        {% endfor %}
+    {% endif %}
+    
+    {% if not reviews and not user_rev %}
+        <h2>No Reviews</h2>
+         {% if 'user_id' in session %}
+            <form action="{{url_for('addReview')}}" method="POST" style="width: 45vw;">
+                <h5>Add review</h5>
+                <div class="form-group">
+                    Review
+                    <textarea name="text" class="form-control" id="" cols="50" rows="5" placeholder="Write Your review here" required></textarea>
+                    Your rating: <input type="number" class="form-control" name="rating" id="" min="1" max="5" placeholder="Rating (1-5)" required>
+                    <input type="hidden" name="product_id" value="{{item.product_id}}">
+                    <input type="submit" value="Add" class="btn btn-primary mt-2">
+                </div>
+            </form>
+        {% endif %}
+    {% endif %}
+<div class="height:500px"></div>
+<script>
+document.getElementById('editbtn').addEventListener('click',function(e){
+    e.preventDefault();
+    ele=e.target.parentElement;
+    ele.style.display='None';console.log(ele.nextElementSibling.style.display='Block');
+});
+</script>
+</div>
+{% endblock %}
+<!-- Main Content Ends -->

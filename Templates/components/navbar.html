@@ -1,0 +1,70 @@
+<!-- ***** Navbar Start ***** -->
+
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark text-white ">
+    <div class="container">
+    <a class="navbar-brand" href="/"><i class="bi bi-bag-check-fill"></i> MyShop</a>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for category in categories %}
+              <a class="dropdown-item text-capitalize" href="/category/{{category}}">{{category}}</a>
+            {% endfor %}
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0 ml-auto mr-auto" action="/search" method="POST">
+        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search..." aria-label="Search" required>
+        <input class="btn" type="submit" value="Search">
+      </form>
+      <ul class="navbar-nav mr-auto">
+        {% if 'user_id' not in session %}
+        <li class="nav-item">
+          <a href="{{url_for('userSignIn')}}" class="text-white nav-link" >
+            Sign in  <i class="bi bi-door-open"></i>
+          </a>
+        </li>
+        {% endif %}
+        {% if 'user_id' in session %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello, {{session['first_name']}} <i class="bi bi-person-circle"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-capitalize" href="{{url_for('userProfile')}}">My Profile</a>
+            <a class="dropdown-item text-capitalize" href="{{url_for('savedItems')}}">Wishlist</a>
+            <a class="dropdown-item text-capitalize" href="{{url_for('myOrders')}}">My orders</a>
+            <a class="dropdown-item text-capitalize" href="{{url_for('signout')}}">Sign out <i class="bi bi-door-closed"></i></a>
+          </div>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <div style="position: relative;">
+            <a href="{{url_for('cart')}}" class="text-white nav-link" >
+              <!-- Cart  -->
+              <i class="bi bi-cart"></i>
+              <!-- <i class="bi bi-cart-fill" style="font-size: 1.8rem;"></i> -->
+              {% if 'cartlen' in session %}
+                <span class="bg-info text-white pl-1 pr-1 rounded" style="position: absolute;top:15%;font-size: small;">{{session['cartlen']}}</span>
+              {% endif %}
+            </a>
+        </div>
+        </li>
+        
+      </ul>
+      
+      
+    </div>
+    </div>
+  </nav>
+<!-- ***** Navbar End ***** -->

@@ -1,0 +1,27 @@
+{% extends "user/base1.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+
+<div class="container">
+    <div class="card" style="width: 80%;margin: 20px auto;">
+        <h2 style="margin: 5px auto;">Sign Up</h2>
+        <form action="{{url_for('userSignUp')}}" method="POST">
+            Enter Email
+            <input class="form-control" type="email" name="email" placeholder="Email" required>
+            <input class="form-control" type="submit">
+        </form>        
+    </div>
+</div>
+
+{% endblock %}
+<!-- Main Content Ends -->

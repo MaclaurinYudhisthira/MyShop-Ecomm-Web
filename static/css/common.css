@@ -1,0 +1,14 @@
+body{
+    position: relative;
+}
+.flash{
+    background: linear-gradient(to bottom right, #7bed9f, #25BC63);
+    padding: 10px 20px;
+    color: #fff;
+    position: absolute;
+    border-radius: 5px;
+    top:2%;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 999999999999 !important;
+}

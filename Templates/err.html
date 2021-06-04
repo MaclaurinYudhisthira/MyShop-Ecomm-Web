@@ -1,0 +1,30 @@
+{% extends "base.html" %}.
+<!-- Title Starts -->
+{% block title %}{% endblock %}
+<!-- Title Starts -->
+
+<!-- Head Code Starts -->
+{% block headcode %}
+    
+{% endblock %}
+<!-- Head Code Ends -->
+
+<!-- Before Nav Starts -->
+{% block befornav %}
+
+{% endblock %}
+<!-- Before Nav Ends -->
+
+<!-- Main Content Starts -->
+{% block content %}
+<div class="container-1">
+    <div style="width:50%;margin:100px auto;text-align:center">
+        <img src="{{url_for('static',filename='img/a.png')}}" alt="" style="border:0" >
+        <h1 class="pt-5">Something Went Wrong</h1>
+    <a href="{{url_for('home')}}" class="btn btn-info mt-4">Go To Home</a>
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- Main Content Ends -->
